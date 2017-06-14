@@ -9,6 +9,7 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,9 +30,8 @@
             <div class="row">
               <h4>Programas</h4>
               <div class="list-group">
-                <button type="button" class="list-group-item" onclick="appController.change(1)">Um extrato</button>
-                <button type="button" class="list-group-item" onclick="appController.change(2)">Criar lista de extratos</button>
-                <button type="button" class="list-group-item disabled" onclick="appController.change(3)">Renomear lista de extratos</button>
+                <button type="button" class="list-group-item" onclick="appController.change('criarLista')">Criar lista de extratos</button>
+                <button type="button" class="list-group-item" onclick="appController.change('renomearLista')">Renomear lista de extratos</button>
               </div>
             </div>
           </div>
@@ -42,69 +42,87 @@
           <div id="app-window">
 
             <div class="panel panel-default">
-              <div class="panel-heading"><strong class="text-uppercase">Um extrato</strong></div>
+              <div class="panel-heading"><strong class="text-uppercase" id="titulo-app">Criar lista</strong></div>
 
               <div class="panel-body">
 
-                <form class="form-horizontal">
+                <div id="criarLista" class="apps">
+                    <form>
+                          <div class="form-group col-sm-3">
+                            <label for="ug" class="control-label">UG</label>
+                            <input id="ug" type="text" name="ug" class="form-control" maxlength="6" placeholder="6 dígitos">
+                          </div>
 
-                  <div class="form-group">
-                    <label for="ug" class="col-sm-4 control-label">Código da Unidade Gestora</label>
-                    <div class="col-sm-7">
-                      <input id="ug" type="text" name="ug" class="form-control" maxlength="6" placeholder="Código de seis números. Ex.: 231454">
+                          <div class="form-group col-sm-3">
+                            <label for="agencia" class="control-label">Agência</label>
+                            <input id="agencia" type="text" name="agencia" class="form-control" maxlength="6" placeholder="Máximo 6 dígitos">
+                          </div>
+
+                          <div class="form-group col-sm-3">
+                            <label for="conta" class="control-label">Conta</label>
+                             <input id="conta" type="text" name="conta" class="form-control" maxlength="13" placeholder="Máximo 13 dígitos">
+                          </div>
+
+                          <div class="form-group col-sm-3">
+                            <label for="tipo" class="control-label">Tipo</label>
+                            <select id="tipo" class="form-control">
+                                <option value="1">Conta corrente</option>
+                                <option value="2">Conta corrente - Fopag</option>
+                                <option value="3">Títulos Públicos</option>
+                                <option value="4">Poupança</option>
+                                <option value="5">Fundo de Investimento</option>
+                                <option value="6">CDB</option>
+                                <option value="7">Outras Aplicações Financeiras</option>
+                            </select>
+                          </div>
+                          <div class="form-group col-sm-12">
+                              <input type="button" id="submit" value="Inserir" class="btn btn-primary"/>
+                              <input type="reset" value="Limpar" class="btn btn-warning"/>
+                          </div>
+
+                    </form>
+
+                    <hr>
+
+                    <div id="tabela-extratos">
+
                     </div>
-                  </div>
 
-                  <div class="form-group">
-                    <label for="agencia" class="col-sm-4 control-label">Nº da Agência</label>
-                    <div class="col-sm-7">
-                      <input id="agencia" type="text" name="agencia" class="form-control" maxlength="6" placeholder="Máximo de seis números.">
+                </div>
+
+                <div id="renomearLista" class="apps hidden">
+
+                    <div class="form-inline pull-right">
+                    <div class="form-group">
+                        <label for="mes" class="control-label">Mês</label>
+                        <select id="mes" class="form-control">
+                            <option value="01">Janeiro</option>
+                            <option value="02">Fevereiro</option>
+                            <option value="03">Março</option>
+                            <option value="04">Abril</option>
+                            <option value="05">Maio</option>
+                            <option value="06">Junho</option>
+                            <option value="07">Julho</option>
+                            <option value="07">Agosto</option>
+                            <option value="07">Setembro</option>
+                            <option value="07">Outubro</option>
+                            <option value="07">Novembro</option>
+                            <option value="07">Dezembro</option>
+                        </select>
                     </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="conta" class="col-sm-4 control-label">Nº da Conta</label>
-                    <div class="col-sm-7">
-                      <input id="conta" type="text" name="conta" class="form-control" maxlength="13" placeholder="Máximo de treze números.">
+                    <div class="form-group">
+                        <label for="ano" class="control-label">Ano</label>
+                        <input id="ano" type="text" name="ano" class="form-control" maxlength="4" value="2017">
                     </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="tipo" class="col-sm-4 control-label">Tipo</label>
-                    <div class="col-sm-7">
-                      <input id="tipo" type="text" name="tipo" class="form-control" maxlength="1" placeholder="1 até 7">
                     </div>
-                  </div>
+                    <div class="clearfix"></div>
+                    <hr>
 
-                  <div class="form-group">
-                    <label for="mes" class="col-sm-4 control-label">Mês</label>
-                    <div class="col-sm-7">
-                      <input id="mes" type="text" name="mes" class="form-control" maxlength="2" placeholder="Incluir o zero. Ex.: 01">
+                    <div id="lista-extratos">
+
                     </div>
-                  </div>
 
-                  <div class="form-group">
-                    <label for="ano" class="col-sm-4 control-label">Ano</label>
-                    <div class="col-sm-7">
-                      <input id="ano" type="text" name="ano" class="form-control" maxlength="4" placeholder="Ex.: 2017">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="file" class="col-sm-4 control-label">Arquivo</label>
-                    <div class="col-sm-7">
-                      <input id="file" type="file" name="file" class="form-control">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="col-sm-offset-4 col-sm-7">
-                      <input type="button" id="submit" value="Renomear" class="btn btn-primary"/>
-                      <input type="reset" value="Limpar" class="btn btn-warning"/>
-                    </div>
-                  </div>
-
-                </form>
+                </div>
 
               </div><!--panel-body-->
 
@@ -141,5 +159,12 @@
     <script src="js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+
+    <!-- Scripts de importação do app -->
+    <script src="js/app/controllers/AppController.js"></script>
+
+    <!-- Script da página -->
+    <script src="js/index.js"></script>
+
   </body>
 </html>

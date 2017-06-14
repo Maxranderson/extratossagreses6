@@ -1,0 +1,1 @@
+var appController = new AppController();
