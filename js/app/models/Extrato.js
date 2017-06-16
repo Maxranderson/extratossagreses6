@@ -1,11 +1,12 @@
 class Extrato {
 
-    constructor(ug, agencia, conta, tipo, sub) {
+    constructor(ug, agencia, conta, tipo, sub, descricao) {
         this._ug = ug;
         this._agencia = ZeroFill.fill(agencia, 6);
         this._conta = ZeroFill.fill(conta, 13);
         this._tipo = tipo;
         this._sub = sub || 0;
+        this._descricao = this._sub==0?'Conta Principal':'';
     }
 
     get ug() {
@@ -28,8 +29,20 @@ class Extrato {
         return this._sub;
     }
 
+    get descricao() {
+        return this._descricao;
+    }
+
+    set descricao(descricao) {
+        this._descricao = descricao;
+    }
+
     nomeCompleto(mes, ano) {
-        return `extrato${this._ug}${this.agencia}${this._conta}${this._tipo}${mes}${ano}.pdf`;
+        return `extrato${this._ug}${this.agencia}${this._conta}${this._tipo}${mes}${ano}${this._sub==0?'':this._sub}.pdf`;
+    }
+
+    isEquals(outroExtrato) {
+        return JSON.stringify(this) == JSON.stringify(outroExtrato);
     }
 
 }

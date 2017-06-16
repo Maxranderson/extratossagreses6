@@ -3,7 +3,6 @@ class AppController {
 	constructor() {
 		this._apps = document.querySelectorAll(".apps");
 		this._appTitulo = document.querySelector("#titulo-app");
-		console.log(this._apps);
 	}
 
 	change(id){

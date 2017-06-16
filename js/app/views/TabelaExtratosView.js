@@ -22,11 +22,22 @@ class TabelaExtratosView extends View {
                             <td>${ext.agencia}</td>
                             <td>${ext.conta}</td>
                             <td>${ext.tipo}</td>
-                            <td>${!ext.tipo==0?"Conta Principal":""}</td>
+                            <td>${ext.descricao?ext.descricao:`
+                                    <input type="text" class="descricaoSubExtratoInput" name="descricao">
+                                    <button class="btn btn-success" onclick="extratoController.confirmaSubExtratoDescricao(${indice}, event)">
+                                        <span class="glyphicon glyphicon-ok">
+                                    </button>
+                                `}
+                            </td>
                             <td colspan="2">
                                 <button class="btn btn-danger" onclick="extratoController.remove(${indice})">
                                     <span class="glyphicon glyphicon-trash">
                                 </button>
+                                ${ext.sub==0?`
+                                <button class="btn btn-primary" onclick="extratoController.adicionaSubExtrato(${indice})">
+                                    <span class="glyphicon glyphicon-plus">
+                                </button>
+                                    `:''}
                             </td>
                         </tr>
                         `).join('')}

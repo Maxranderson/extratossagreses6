@@ -18,7 +18,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body class="hidden-print">
     <div class="container-fluid add-margin">
       <div class="row text-center top-page">
         <h1>Padronizador de extratos do Sagres - PB</h1>
@@ -85,17 +85,22 @@
                     </div>
                     <hr>
 
-                    <label for="utilitarios"><strong class="text-uppercase">Utilitários</strong></label>
+                    <strong class="text-uppercase">Serviços externos</strong>
+                    <br>
+                    <br>
                     <div id="utilitarios">
-                        <input id="importarArquivosSagresInput" type="file" style="visibility:hidden" onchange="extratoController.importarDoSagres" />
-                        <input type="button" class="btn btn-success" value="Importar contas do Sagres" onclick="document.querySelector('#importarArquivosSagresInput').click();" />
+                        <input id="importarArquivosSagresInput" type="file" class="hidden" onchange="extratoController.importarDoSagres()" multiple/>
+                        <input type="button" class="btn btn-info" value="Importar contas do Sagres" onclick="extratoController.arquivosSagres.click();" />
+
                     </div>
                     <hr>
 
                     <div class="row">
+                        <div class="pull-right">
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#limpaTabelaModal">Limpar tabela</button>
+                            <button class="btn btn-success" onclick="extratoController.gerarLista()">Gerar Lista</button>
+                        </div>
                         <div id="tabelaExtratosView">
-
-                            <p>dasdada</p>
                         </div>
                     </div>
 
@@ -129,8 +134,13 @@
                     </div>
                     <hr>
                     <div class="row">
-                        <div id="lista-extratos">
-                            <p>dadasdsad</p>
+                        <div class="pull-right">
+                            <input id="importarListaInput" type="file" class="hidden" onchange="extratoController.importarLista()"/>
+                            <input type="button" class="btn btn-default" value="Importar Lista" onclick="extratoController.arquivoLista.click();" />
+                            <button class="btn btn-default" onclick="extratoController.exportarLista()">Exportar Lista</button>
+                            <button class="btn btn-success" onclick="extratoController.renomearLista()">Renomear Lista</button>
+                        </div>
+                        <div id="listaExtratosView">
                         </div>
                     </div>
 
@@ -165,6 +175,26 @@
 
       </div><!--row-->
 
+
+
+
+        <div class="modal fade" id="limpaTabelaModal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <div class="modal-body">
+                <p>Deseja realmente limpar a tabela?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="extratoController.limpaTabela()" data-dismiss="modal">Limpar Tabela</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
     </div> <!--container-->
     <footer class="footer text-center"><p>&copy;2017 Desenvolvido por <a href="https://www.linkedin.com/in/maxranderson-rodrigues-ara%C3%BAjo-4a7187104/">Maxranderson Araújo</a></p></footer>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -176,8 +206,10 @@
     <script src="js/app/models/Extrato.js"></script>
     <script src="js/app/models/ListaExtratos.js"></script>
     <script src="js/app/services/ProxyFactory.js"></script>
+    <script src="js/app/services/ExtratoService.js"></script>
     <script src="js/app/views/View.js"></script>
     <script src="js/app/views/TabelaExtratosView.js"></script>
+    <script src="js/app/views/ListaExtratosView.js"></script>
     <script src="js/app/helpers/ZeroFill.js"></script>
     <script src="js/app/helpers/Bind.js"></script>
     <script src="js/app/controllers/AppController.js"></script>
