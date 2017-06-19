@@ -8,7 +8,7 @@ class ExtratoService {
         return new Promise((resolve, reject) => {
             let promisesArray = [];
             for(let i = 0; i < arquivos.length; i++){
-                let arquivo = arquivos[0];
+                let arquivo = arquivos[i];
                 promisesArray.push(this.importarArquivo(arquivo));
             }
             Promise.all(promisesArray).then(arrays => {

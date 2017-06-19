@@ -112,13 +112,12 @@ class ExtratoController {
     }
 
     importarLista() {
-
         let arquivo = this.arquivoLista.files[0];
         this._service.importarLista(arquivo)
                         .then(extratos => {
                             this._listaExtratos.limpa();
                             extratos.forEach(extrato =>
-                                        this._listaExtratos.adiciona(extrato));
+                                        this._listaExtratos.adiciona(extrato))
                         })
                         .catch(/*Implementar mensagem de erro*/);
     }

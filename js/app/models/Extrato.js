@@ -6,7 +6,7 @@ class Extrato {
         this._conta = ZeroFill.fill(conta, 13);
         this._tipo = tipo;
         this._sub = sub || 0;
-        this._descricao = this._sub==0?'Conta Principal':'';
+        this._descricao = this._sub==0?'Conta Principal': descricao || '';
     }
 
     get ug() {
